@@ -2,20 +2,26 @@
 
 include_once '../../conexion.php';
 
+//Valores del formulario
 $estilo_ejercicio2 = $_POST['estilo_recinto'];
 $promedio = $_POST['promedio_recinto'];
 $genero = $_POST['genero_recinto'];
 
+//Probabilidades fijas
 $probabilidadTipoRecinto[0] = 0.5;
 $probabilidadTipoRecinto[1] = 0.5;
 
+//Posibles recintos
 $posibleRecinto[0] = "Paraiso";
 $posibleRecinto[1] = "Turrialba";
 
+//consulta del procedimiento
 $sql_procedure_recinto = "CALL procedimientoEjercicio2(?, ?, ?, ?, @generoOutput, @promedioOutput, @estiloOutput)";
 
+//corro tantos posibles resultados haya
 for ($contador = 0; $contador < count($posibleRecinto) ; $contador++) {
     
+    //Hago la llamada a la base de datos
     $call = mysqli_prepare($conection, $sql_procedure_recinto);
     mysqli_stmt_bind_param($call, 'ssss', $estilo_ejercicio2, $promedio, $genero, $posibleRecinto[$contador]);
     mysqli_stmt_execute($call);
@@ -23,10 +29,12 @@ for ($contador = 0; $contador < count($posibleRecinto) ; $contador++) {
     $select_recinto = mysqli_query($conection, 'SELECT @generoOutput, @promedioOutput, @estiloOutput');
     $get_recinto = mysqli_fetch_assoc($select_recinto);
 
+    //obtengo el valor de las probabilidades
     $genero_recinto[$contador] = $get_recinto['@generoOutput'];
     $promedio_recinto[$contador] = $get_recinto['@promedioOutput'];
     $estilo_recinto[$contador] = $get_recinto['@estiloOutput'];
 
+     //Multiplico proabilidades por iteracion
     $probabilidad_total_recinto[$contador] = $genero_recinto[$contador] * $promedio_recinto[$contador] * $estilo_recinto[$contador] * $probabilidadTipoRecinto[$contador];
     echo "Probabilidad de sea " . $posibleRecinto[$contador] . " = " .  $probabilidad_total_recinto[$contador]; 
 
