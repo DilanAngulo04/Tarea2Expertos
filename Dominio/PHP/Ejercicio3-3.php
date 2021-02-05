@@ -29,6 +29,7 @@ for ($contador = 0; $contador < count($posiblegenero) ; $contador++) {
      $select_generos_ejercicio3 = mysqli_query($conection, 'SELECT @recintoOutput, @promedioOutput, @estiloOutput');
      $get_generos_ejercicio3 = mysqli_fetch_assoc($select_generos_ejercicio3);
      
+    
      //obtengo el valor de las probabilidades
      $recinto_probabilidad[$contador] = $get_generos_ejercicio3['@recintoOutput'];
      $promedio_probabilidad[$contador] = $get_generos_ejercicio3['@promedioOutput'];
@@ -37,6 +38,8 @@ for ($contador = 0; $contador < count($posiblegenero) ; $contador++) {
       //Multiplico proabilidades por iteracion
      $probabilidad_total_ejercicio3[$contador] =  $recinto_probabilidad[$contador] * $promedio_probabilidad[$contador] * $estilo_probabilidad[$contador] * $probabilidadGenero[$contador];
      
+     echo "Probabilidad que sea " . $posiblegenero[$contador] . " = " . $probabilidad_total_ejercicio3[$contador];
+
 }
 
 //Envio una respuesta

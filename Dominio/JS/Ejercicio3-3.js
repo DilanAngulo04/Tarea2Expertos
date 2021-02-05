@@ -16,11 +16,7 @@ formulario_get_genero.addEventListener('submit', function(e){
         .then(res => res.text())
         .then(text => {
 
-            if(text === 'error'){
-                alert("Hubo un error al calular los datos") 
-            }else{
-                alert("Su genero es = " + text)
-            }
+            alert(text)
            
         })
     

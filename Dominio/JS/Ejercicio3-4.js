@@ -16,11 +16,7 @@ formulario_get_estilo_simple.addEventListener('submit', function(e){
         .then(res => res.text())
         .then(text => {
 
-            if(text === 'error'){
-                alert("Hubo un error al calular los datos") 
-            }else{
-                alert("Su estilo de aprendizaje es = " + text)
-            }
-           
+            alert( text)
+            
         })
 })

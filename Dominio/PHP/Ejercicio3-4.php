@@ -29,7 +29,7 @@ for ($contador = 0; $contador< count($tipoEstilo)  ; $contador++) {
 
      //Hago la llamada a la base de datos
      $call = mysqli_prepare($conection, $sql_procedimiento_ejercicio4);
-     mysqli_stmt_bind_param($call, 'ssss', $precint, $promedio_estilo_simple, $genero_estilo_simple, $tipoEstilo[$contador]);
+     mysqli_stmt_bind_param($call, 'ssss', $recinto_estilo_simple, $promedio_estilo_simple, $genero_estilo_simple, $tipoEstilo[$contador]);
      mysqli_stmt_execute($call);
      
      $select_ejercicio4 = mysqli_query($conection, 'SELECT @recintoOutput, @promedioOutput, @generoOutput');
@@ -43,7 +43,7 @@ for ($contador = 0; $contador< count($tipoEstilo)  ; $contador++) {
       //Multiplico proabilidades por iteracion
      $probabiliadad_total_ejercicio4[$contador] =  $recinto_p_ejercicio4[$contador] * $promedio_p_ejercicio4[$contador] * $genero_p_ejericicio4[$contador] * $probabiliadadEstiloAprendizaje[$contador];
      
-     echo "Probabilidad que sea " . $tipoEstilo[$contador] . " = " . $probabiliadad_total_ejercicio4[$contador];
+     echo "Probabilidad que sea " . $tipoEstilo[$contador] . " = " . $probabiliadad_total_ejercicio4[$contador] . "    ";
 
      //Calculo cual probabilidad es la mayor y genero el resultado
     //Al final las iteraciones, la variable tendr[a el valor mas alto]
@@ -60,6 +60,5 @@ for ($contador = 0; $contador< count($tipoEstilo)  ; $contador++) {
 
 //Genero una respuesta a la interfaz
 echo json_encode("Su estilo de aprendizaje es = " . $estilo);
-
 
 ?>

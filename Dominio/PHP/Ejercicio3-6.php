@@ -24,7 +24,7 @@ for ($contador = 0; $contador < count($tipoRed) ; $contador++) {
     
      //Hago la llamada a la base de datos
      $call = mysqli_prepare($conection, $sql_ejercicio6);
-     mysqli_stmt_bind_param($call, 'iiiis', $fiabilidad_red, $n_enlaces_red, $costo_red, $capacidad_red, $tipoRed[$contador]);
+     mysqli_stmt_bind_param($call, 'iiiis', $fiabilidad_red, $n_enlaces_red, $capacidad_red, $costo_red, $tipoRed[$contador]);
      mysqli_stmt_execute($call);
      
      $select_ejercicio6 = mysqli_query($conection, 'SELECT @fiabilidadOutput, @enlacesOutput, @costoOutput, @capacidadOutput');
@@ -35,9 +35,13 @@ for ($contador = 0; $contador < count($tipoRed) ; $contador++) {
      $enlaces_p[$contador] = $get_tipo_Red['@enlacesOutput'];
      $costo_p[$contador] = $get_tipo_Red['@costoOutput'];
      $capacidad_p[$contador] = $get_tipo_Red['@capacidadOutput'];
+
+
      
       //Multiplico proabilidades por iteracion
      $probabilidad_total[$contador] =  $fiabilidad_p[$contador] * $enlaces_p[$contador] * $costo_p[$contador] * $capacidad_p[$contador] * $probabilidadTipoRed[$contador];
+     
+     echo "Probabilidad que sea " . $tipoRed[$contador] . " = " . $probabilidad_total[$contador] . "   ";
 }
 
 //Genero una respuesta a la interfaz

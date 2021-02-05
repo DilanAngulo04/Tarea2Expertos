@@ -16,11 +16,7 @@ formulario_tipo_profesor.addEventListener('submit', function(e){
         .then(res => res.text())
         .then(text => {
 
-            if(text === 'error'){
-                alert("Hubo un error al calular los datos") 
-            }else{
-                alert("Tipo de profesor = " + text)
-            }
-           
+            alert(text)
+            
         })
 })
